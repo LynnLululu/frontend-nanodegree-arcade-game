@@ -33,8 +33,8 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-    this.x = 202;
-    this.y = 404;
+    this.x = 202;   // set the initial position x of player
+    this.y = 404;   // set the initial postion y 
     this.sprite = 'images/char-boy.png'
 };
 
@@ -42,29 +42,25 @@ Player.prototype.update = function() {
     if (this.y < 0) {   // When the Player reaches the watherside.
         this.x = 202;   // reset it to the begin point.
         this.y = 404;
-    } else if (this.y == 238) {
-        var dis1 = Math.abs(this.x - allEnemies[2].x);
-        var dis2 = Math.abs(this.x - allEnemies[5].x);
-    } else if (this.y == 155) {
+    } else if (this.y == 238) {                            // When the player is on the 3rd stone row,
+        var dis1 = Math.abs(this.x - allEnemies[2].x);     // detect the distance between player
+        var dis2 = Math.abs(this.x - allEnemies[5].x);     // and the two enemies in this row.
+    } else if (this.y == 155) {                            // When the player is on the 2nd stone row,
         var dis1 = Math.abs(this.x - allEnemies[1].x);
         var dis2 = Math.abs(this.x - allEnemies[4].x);
-    } else if (this.y == 72) {
+    } else if (this.y == 72) {                             // When the player is on the 1st stone row,
         var dis1 = Math.abs(this.x - allEnemies[0].x);
         var dis2 = Math.abs(this.x - allEnemies[3].x);
     }
-    if (dis1 < 80 || dis2 < 80) {
-        this.x = 202;
+    if (dis1 < 80 || dis2 < 80) {    // When the distance is too short,
+        this.x = 202;                // set the player to the starting point.
         this.y = 404;
     }
 
 };
 
-Player.prototype.checkCollisions = function() {
-    
-};
-
 Player.prototype.render = function(dt) {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);  //draw the player on the screen
 };
 
 // This handleInput() method use the keyCode from allowedKeys
@@ -94,11 +90,6 @@ var enemy5 = new Enemy(-202,145,400);
 var enemy6 = new Enemy(-202,225,350);
 
 var allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5,enemy6];
-
-
-
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
